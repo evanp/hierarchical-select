@@ -86,9 +86,9 @@ function GeographicalSelector(props) {
     return <Form>
         <Container>
             <Row>
-                <Col><FilterSelect id="countries" options={countries} loading={countriesLoading} enabled={true} onSelect={selectCountry} /></Col>
-                <Col><FilterSelect id="regions" options={regions} loading={regionsLoading} enabled={regionsEnabled} onSelect={selectRegion} /></Col>
-                <Col><FilterSelect id="cities" options={cities} loading={citiesLoading} enabled={citiesEnabled} onSelect={selectCity} /></Col>
+                <Col><FilterSelect id="countries" label="Countries" options={countries} loading={countriesLoading} enabled={true} onSelect={selectCountry} /></Col>
+                <Col><FilterSelect id="regions" label="Regions" options={regions} loading={regionsLoading} enabled={regionsEnabled} onSelect={selectRegion} /></Col>
+                <Col><FilterSelect id="cities" label="Cities" options={cities} loading={citiesLoading} enabled={citiesEnabled} onSelect={selectCity} /></Col>
             </Row>
         </Container>
     </Form>

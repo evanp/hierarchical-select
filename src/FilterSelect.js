@@ -1,57 +1,39 @@
-import React, {useEffect, useState} from 'react'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import FormSelect from 'react-bootstrap/FormSelect'
+import {useState} from 'react'
 import FormControl from 'react-bootstrap/FormControl'
+import FormLabel from 'react-bootstrap/FormLabel'
+import FormGroup from 'react-bootstrap/FormGroup'
+import { useEffect } from 'react'
 
 function FilterSelect(props) {
-    const {options, loading, enabled, onSelect} = props
 
-    const [filter, setFilter] = useState('')
+    const {id, label, options, loading, enabled, onSelect} = props
+    const listId = `${id}-list`
+    const inputId = `${id}-input`
 
-    const filteredOptions = (filter.length === 0) ?
-        options :
-        options.filter((option) => option[1].toLowerCase().includes(filter.toLowerCase()))
+    const [content, setContent] = useState('')
 
-    const onFilterChange = (event) => {
-        setFilter(event.target.value)
-    }
-
-    const onSelectChange = (event) => {
-        setFilter('')
-        onSelect(event.target.value)
+    const onSelectEvent = (event) => {
+        const value = event.target.value
+        setContent(value)
+        const option = options.find((option) => option[1] === value)
+        if (option) {
+            onSelect(option[0], option[1])
+        }
     }
 
     useEffect(() => {
-        setFilter('')
-    }, [options, loading])
+        if (loading || !enabled) {
+            setContent('')
+        }
+    }, [loading, enabled])
 
-    return <Container>
-        <Row>
-        {
-            loading &&
-            <FormControl id="filter" disabled={true} value="Loading..." />
-        }
-        {
-            !loading &&
-            <FormControl id="filter" disabled={!enabled} value={filter} onChange={onFilterChange} />
-        }
-        </Row>
-        <Row>
-        {
-            loading &&
-            <FormSelect id="places" disabled={true}>
-                <option key="loading" value="loading">Loading...</option>
-            </FormSelect>
-        }
-        {
-            !loading &&
-            <FormSelect id="places" disabled={!enabled} onChange={onSelectChange}>
-                {filteredOptions.map((option) => <option key={option[0]} value={option[0]}>{option[1]}</option>)}
-            </FormSelect>
-        }
-        </Row>
-    </Container>
+    return <FormGroup>
+            <FormLabel htmlFor={inputId}>{label}</FormLabel>
+            <FormControl id={inputId} list={listId} disabled={!enabled || loading} placeholder={(loading) ? "Loading..." : "Type to choose"} onChange={onSelectEvent} value={content}/>
+            <datalist id={listId}>
+                {options.map((option) => <option key={option[0]} value={option[1]} label={option[1]} />)}
+            </datalist>
+        </FormGroup>
 }
 
 export default FilterSelect
