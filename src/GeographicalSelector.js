@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import FilterSelect from './FilterSelect'
 
-const server="http://api.geonames.org/"
 const username="evanprodromou"
 
 async function getCountries() {
@@ -48,7 +47,7 @@ function GeographicalSelector(props) {
     // Initial state
 
     useEffect(() => {
-        if (countries.length == 0 && !countriesLoading) {
+        if (countries.length === 0 && !countriesLoading) {
             setCountriesLoading(true)
             getCountries().then((results) => {
                 setCountries(results)
