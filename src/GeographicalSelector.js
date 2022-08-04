@@ -8,14 +8,14 @@ import FilterSelect from './FilterSelect'
 const username="evanprodromou"
 
 async function getCountries() {
-    const url = `http://api.geonames.org/countryInfoJSON?username=${username}`
+    const url = `https://secure.geonames.org/countryInfoJSON?username=${username}`
     const response = await fetch(url)
     const data = await response.json()
     return data.geonames.map((country) => [country.countryCode, country.countryName])
 }
 
 async function getRegions(country) {
-    const url = `http://api.geonames.org/searchJSON?country=${country}&fcode=ADM1&username=${username}`
+    const url = `https://secure.geonames.org/searchJSON?country=${country}&fcode=ADM1&username=${username}`
     const response = await fetch(url)
     const data = await response.json()
     return data.geonames.map((region) => [region.countryCode+'-'+region.adminCode1, region.name])
@@ -23,7 +23,7 @@ async function getRegions(country) {
 
 async function getCities(region) {
     const [country, adm1] = region.split('-')
-    const url=`http://api.geonames.org/searchJSON?featureClass=P&adminCode1=${adm1}&country=${country}&username=${username}`
+    const url=`https://secure.geonames.org/searchJSON?featureClass=P&adminCode1=${adm1}&country=${country}&username=${username}`
     const response = await fetch(url)
     const data = await response.json()
     return data.geonames.map((city) => [city.geonameId, city.name])
