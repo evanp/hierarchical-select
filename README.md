@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# hierarchical-select
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a proof-of-concept for a user-interface pattern we have in our OpenClimate project. I wanted to consider the pattern in isolation, so I broke it out into a separate project.
 
-## Available Scripts
+## License
 
-In the project directory, you can run:
+[CCO](https://creativecommons.org/publicdomain/zero/1.0/) You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission. 
 
-### `npm start`
+## How it works
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can select a country from the box at the left. This will make the country the selected geographical item (seen in the list on the bottom) and load a list of regions in the central box.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Selecting a region will make the region the selected item (again, seen in the list) and load a list of cities.
 
-### `npm test`
+Selecting a city will make it the selected item.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The selectors for smaller geographical units (region, city) are disabled until a bigger geographical unit is selected.
 
-### `npm run build`
+Changing the selection for a larger geographical unit when a smaller one is selected will clear the box and make the larger unit the selected one.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Differences
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- This project uses [React Bootstrap](https://react-bootstrap.github.io/) as a UI framework, so I didn't have to extract all the components from the custom framework used by OpenClimate.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- This project uses [Geonames](https://geonames.org/) to provide geographical data.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- This project uses a [datalist](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist) to provide the selected items.
